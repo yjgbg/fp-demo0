@@ -2,7 +2,6 @@ package com.github.yjgbg.java;
 
 import java.util.function.Function;
 
-// 引申: java 中函数式编程的不足: 如下的piped函数。直接被推断为
 public class Pipe {
 
 	public static void main(String[] args) {
