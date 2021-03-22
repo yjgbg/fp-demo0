@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 // 单射： 指将不同的变量映射到不同的值的函数。
 // 满射: 对值域（陪域）中任意元素，都存在至少一个定义域中的元素与之对应
 // JDK的基本类型中，哪些数据类型之间是等势的?
+// Long和long等势(其实就是size相等)吗？
 public class PureFunction {
 	public static void main(String[] args) {
 		final Function1<Integer, Boolean> isPrime = x -> x % 2 == 0; // 纯函数? 定义域? 值域? 单射? 满射?
@@ -22,16 +23,15 @@ public class PureFunction {
 		final Function1<String, String[]> split = str -> str.split(","); // 纯函数? 定义域? 值域? 单射? 满射?
 		final Function0<Double> rdm = Math::random; // 纯函数? 定义域? 值域? 单射? 满射?
 		final Function1<String, Integer> parseInt = Integer::parseInt; // 纯函数?  定义域? 值域? 单射? 满射?
+		final Function1<DTO,DTO> processDTO = dto -> { // 纯函数? 定义域? 值域? 单射? 满射?
+			if (dto.getName() != null) dto.setStatus(true);
+			return dto;
+		};
 		final Function1<Double, Long> double2Long = Double::doubleToRawLongBits; // 纯函数? 定义域? 值域? 单射? 满射?
 		final Function1<Long, Double> long2Double = Double::longBitsToDouble; // 纯函数? 定义域? 值域? 单射? 满射?
 		//上面两个函数为双射，也就是说Long和Double是等势的，底层原因：都是64位二进制数，所以它们能包含的信息量是相等的，同理：int和float是等势的
 		final Function1<BigDecimal, BigDecimal> doub = x -> x.multiply(BigDecimal.valueOf(2)); // 纯函数? 定义域? 值域? 单射? 满射?
 
-	}
-
-	// 纯函数? 定义域? 值域? 单射?满射?
-	public static void processDTO(DTO dto) {
-		if (dto.getName() != null) dto.setStatus(true);
 	}
 
 	public static Either<NumberFormatException, Integer> parseInt(String string) {
