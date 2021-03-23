@@ -16,16 +16,17 @@
   一切由并发引起的问题，一切由多线程、多进程引起的问题，都是由变量可变引起的！！！如果变量不可变，那么所有的竞争问题、死锁问题、并发更新问题都将烟消云散
   
 Immutable有什么好处?
-为什么java中String要设计成不可变？
 - 线程安全
-- 不同的 String 变量可以在常量池中引用相同的String变量，节省内存
-- 针对自己设计的不可变对象（类），也可以通过类似的方式，在参数相同的方式下返回相同对象
+- 可以被重复使用
+- 当一个对象是不可变的，那么需要拷贝这个对象的内容时，就不用复制它的本身而只是复制它的地址，
+  复制地址（通常一个指针的大小）只需要很小的内存空间，具有非常高的效率
+针对自己设计的不可变对象（类），也可以通过类似的方式，在参数相同的方式下返回相同对象，降低内存开销
 
 ```java
 import java.util.HashMap;
 import java.util.Map;
 
-public class R {
+public final class R {
   private final Integer code;
   private R(int integer) {
     this.code = integer;
